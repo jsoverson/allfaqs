@@ -1,0 +1,26 @@
+
+<div class="col-md-4">
+  <div class="" style="top: 2rem;">
+    {{ if and (.Site.Params.sidebar) (isset .Site.Params.sidebar "about") }}
+    <div class="p-4 mb-3 bg-light rounded">
+      <h4 class="fst-italic">{{ i18n "about" }}</h4>
+      <p class=mb-0 dir="auto">{{ .Site.Params.sidebar.about | markdownify }}</p>
+    </div>
+    {{ end }}
+    {{ if .Site.Params.sidebar }}
+      {{ partialCached "toc.html" .}}
+    {{ end }}
+  </div>
+
+  {{ with .Site.Menus.sidebar }}
+
+  <div class="p-4">
+    <h4>{{ i18n "links" }}</h4>
+    <ol class="list-unstyled mb-0">
+      {{ range . }}
+      <li><a href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ol>
+  </div>
+  {{ end }}
+</div>

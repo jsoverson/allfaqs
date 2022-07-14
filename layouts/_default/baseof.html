@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}" {{ if or (eq .Lang "ar") (eq .Lang "fa") }}dir="rtl"{{ end }}>
+
+  <head>
+    {{ partial "head-meta.html" . }}
+
+    {{ block "schema-dot-org" . }}
+      <!-- schema.org metadata differs for Nodes and Pages -->
+    {{ end }}
+
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+
+    {{ partialCached "head-css.html" . "asdf" -}}
+
+    {{ "<!-- minified Font Awesome for SVG icons -->" | safeHTML }}
+    {{ $fontawesome := resources.Get "js/fontawesome.min.js" | resources.Fingerprint }}
+    <script defer src="{{ $fontawesome.Permalink }}" integrity="{{ $fontawesome.Data.Integrity }}" crossorigin="anonymous"></script>
+
+    {{ "<!-- RSS 2.0 feed -->" | safeHTML }}
+    {{ with .OutputFormats.Get "rss" -}}
+      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+
+    {{ if .Site.GoogleAnalytics }}
+    {{ partial "cookie-consent.html" . }}
+    {{ end }}
+
+    {{ partial "head-custom.html" . }}
+  </head>
+
+  <body>
+
+    <header class="content-header lh-1 py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-6 pt-1">
+          <a class="nav-link {{ if .IsHome }}active{{ end }}" href="{{ .Site.BaseURL | absLangURL }}">{{ .Site.Title | safeHTML }}</a>
+          {{- $currentPage := . -}}
+          {{ range .Site.Menus.navbar }}
+          {{ $menuURL := .URL | absLangURL }}
+          <a class="nav-link{{ if or ($currentPage.IsMenuCurrent "navbar" .) ($currentPage.HasMenuCurrent "navbar" .) }} active{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+          {{ end }}
+        </div>
+      </div>
+    </header>
+
+
+    {{ block "body" . }}
+
+    <main class="container">
+      <div class="row g-5">
+        <div class="col-md-8">
+          {{ if .Site.Params.description }}
+          <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            {{ .Site.Params.description }}
+          </h3>
+          {{ end }}
+
+          {{ block "main" . }}
+          <!-- The part of the page that begins to differ between templates -->
+          {{ end }}
+
+        </div>
+
+        {{ partial "sidebar.html" . }}
+
+      </div>
+
+    </main>
+    {{ end }}
+
+
+    {{ block "footer" . }}
+    <footer class="container content-footer">
+      <div class="row">
+      <p dir="auto">
+      {{ if .Site.Copyright }}
+      {{ .Site.Copyright | markdownify }}
+      {{ end }}
+      </p>
+      <p>
+      <a href="#">{{ i18n "backToTop" }}</a>
+      </p>
+    </div>
+    </footer>
+    {{ end }}
+
+  </body>
+
+</html>
+
+

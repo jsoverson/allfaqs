@@ -1,0 +1,8 @@
+
+  <div class="p-4">
+    <ol class="list-unstyled mb-0">
+      {{ range (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}
+      <li><a href="{{.RelPermalink}}">{{.Title | markdownify }}</a></li>
+      {{ end }}
+    </ol>
+  </div>
