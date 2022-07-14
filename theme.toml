@@ -1,0 +1,17 @@
+name = "allfaqs"
+license = "CC-BY-3.0"
+licenselink = "https://github.com/jsoverson/hugo-theme-bootstrap-list/blob/master/LICENSE.txt"
+description = "A Hugo theme for AllFAQs lists."
+homepage = "https://github.com/jsoverson/allfaqs"
+demosite = "https://example.com"
+tags = ["bootstrap", "blog", "faq", "font awesome"]
+features = ["responsive", "blog", "faq"]
+min_version = 0.55
+
+[author]
+name = "Jarrod Overson"
+homepage = "https://jarrodoverson.com"
+
+[original]
+name = "Alan Orth"
+homepage = "https://picturingjordan.com"

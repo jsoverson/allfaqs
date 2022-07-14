@@ -1,0 +1,12 @@
+{{ $dateFormat := default "Mon Jan 2, 2006" (index .Site.Params "date_format") }}
+
+<article class="content-post">
+  <header>
+    <h2 class="content-title mb-1" dir="auto"><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h2>
+  </header>
+  <p>
+  {{ .Content }}
+  </p>
+</article> <!-- /.content-post -->
+
+

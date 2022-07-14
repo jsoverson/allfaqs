@@ -1,0 +1,4 @@
+node_modules
+exampleSite/themes
+package-lock.json
+.hugo_build.lock
