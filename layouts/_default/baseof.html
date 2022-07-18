@@ -32,9 +32,9 @@
 
   <body>
 
-    <header class="content-header lh-1 py-3">
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-6 pt-1">
+    <header class="content-header py-3 p-4">
+      <div class="row">
+        <div class="col pt-1">
           <a class="nav-link {{ if .IsHome }}active{{ end }}" href="{{ .Site.BaseURL | absLangURL }}">{{ .Site.Title | safeHTML }}</a>
           {{- $currentPage := . -}}
           {{ range .Site.Menus.navbar }}
@@ -48,7 +48,7 @@
 
     {{ block "body" . }}
 
-    <main class="container">
+    <main class="container mt-2">
       <div class="row g-5">
         <div class="col-md-8">
           {{ if .Site.Params.description }}
